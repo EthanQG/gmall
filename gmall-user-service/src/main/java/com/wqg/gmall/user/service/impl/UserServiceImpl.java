@@ -1,0 +1,38 @@
+package com.wqg.gmall.user.service.impl;
+
+import com.alibaba.dubbo.config.annotation.Service;
+import com.wqg.gmall.bean.UmsMember;
+import com.wqg.gmall.bean.UmsMemberReceiveAddress;
+import com.wqg.gmall.service.UserService;
+import com.wqg.gmall.user.mapper.UmsMemberReceiveAddressMapper;
+import com.wqg.gmall.user.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+
+import java.util.List;
+
+/**
+ * @Auther: wqg
+ * @Description:
+ */
+@Service
+public class UserServiceImpl implements UserService {
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    UmsMemberReceiveAddressMapper umsMemberReceiveAddressMapper;
+    @Override
+    public List<UmsMember> getAllUser() {
+        List<UmsMember> umsMemberList=userMapper.selectAll();
+        return umsMemberList;
+    }
+
+    @Override
+    public List<UmsMemberReceiveAddress> getReceiveAddressByMemberId(String memberId) {
+        UmsMemberReceiveAddress umsMemberReceiveAddress=new UmsMemberReceiveAddress();
+        umsMemberReceiveAddress.setMemberId(memberId);
+        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses=umsMemberReceiveAddressMapper.select(umsMemberReceiveAddress);
+        return umsMemberReceiveAddresses;
+    }
+}
