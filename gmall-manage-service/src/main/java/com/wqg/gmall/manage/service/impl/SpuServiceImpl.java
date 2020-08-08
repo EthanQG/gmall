@@ -92,4 +92,29 @@ public class SpuServiceImpl implements SpuService {
 
         return PmsProductSaleAttrs;
     }
+
+    //根据spuid查询销售属性列表
+    @Override
+    public List<PmsProductSaleAttr> spuSaleAttrListCheckBySku(String productId,String skuId) {
+       /* PmsProductSaleAttr pmsProductSaleAttr=new PmsProductSaleAttr();
+        pmsProductSaleAttr.setProductId(productId);
+        //根据spuid查询spu销售属性列表
+        List<PmsProductSaleAttr> pmsProductSaleAttrs=pmsProductSaleAttrMapper.select(pmsProductSaleAttr);
+        //给销售属性赋值
+        for (PmsProductSaleAttr productSaleAttr:pmsProductSaleAttrs)
+        {
+            String saleAttrId=productSaleAttr.getSaleAttrId();
+            PmsProductSaleAttrValue pmsProductSaleAttrValue=new PmsProductSaleAttrValue();
+            pmsProductSaleAttrValue.setSaleAttrId(saleAttrId);
+            pmsProductSaleAttrValue.setProductId(productId);
+            //根据销售属性id和spuid查询到对应属性值的值
+            List<PmsProductSaleAttrValue> pmsProductSaleAttrValues=pmsProductSaleAttrValueMapper.select(pmsProductSaleAttrValue);
+            productSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValues);
+        }*/
+       //查询当前sku所在的销售属性列表和销售属性值列表 根据spu查询所有销售属性列表
+        // 然后根据skuid确定这个sku的有那些属性 标记为ischeckd
+
+        List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.selectSpuSaleAttrListCheckBySku(productId,skuId);
+        return pmsProductSaleAttrs;
+    }
 }

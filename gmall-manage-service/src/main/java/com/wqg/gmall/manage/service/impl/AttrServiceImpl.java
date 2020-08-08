@@ -16,6 +16,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Auther: wqg
@@ -100,6 +101,13 @@ public class AttrServiceImpl implements AttrService {
     public List<PmsBaseSaleAttr> baseSaleAttrList() {
 
         return pmsBaseSaleAttrMapper.selectAll();
+    }
+
+    @Override
+    public List<PmsBaseAttrInfo> getAttrValueListByValueId(Set<String> valueIdSet) {
+        String valueIdStr=StringUtils.join(valueIdSet,",");
+        List<PmsBaseAttrInfo> pmsBaseAttrInfos=pmsBaseAttrInfoMapper.selectAttrValueListByValueId(valueIdSet);
+        return pmsBaseAttrInfos;
     }
 
 
